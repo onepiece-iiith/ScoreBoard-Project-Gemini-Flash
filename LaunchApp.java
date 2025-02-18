@@ -85,7 +85,7 @@ public class LaunchApp extends Application {
 
             PrintWriter output1 = new PrintWriter(teamFile);
 
-            for (String names : getTeamList()) {
+            for (String names : getFileContent("AllTeamName.txt")) {
                 output1.println(names);
             }
 
@@ -104,7 +104,7 @@ public class LaunchApp extends Application {
 
             PrintWriter output2 = new PrintWriter(playerFile);
 
-            for (String names : getPlayerList()) {
+            for (String names : getFileContent("AllPlayerName.txt")) {
                 output2.println(names);
             }
 
@@ -125,63 +125,17 @@ public class LaunchApp extends Application {
 
 
 
-
-
-
-
-
-
-    public ArrayList<String> getTeamList() throws IOException {
-
-
-        ArrayList<String> list = new ArrayList<String>();
-
-
-        InputStream in = new FileInputStream("AllTeamName.txt");                    // For IDE
-        //InputStream in = getClass().getResourceAsStream("/AllTeamName.txt");            // For JAR
+    public ArrayList<String> getFileContent(String fileName) throws IOException {
+        ArrayList<String> list = new ArrayList<>();
+        InputStream in = new FileInputStream(fileName);                    
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-
-
         String line;
-
-        while ((line=reader.readLine())!=null) {
+        while ((line = reader.readLine()) != null) {
             list.add(line);
         }
-
         in.close();
         reader.close();
-
-
         return list;
-
     }
-
-    public ArrayList<String> getPlayerList() throws IOException {
-
-        ArrayList<String> list = new ArrayList<String>();
-
-        InputStream in = new FileInputStream("AllPlayerName.txt");                    // For IDE
-        //InputStream in = getClass().getResourceAsStream("/AllPlayerName.txt");            // For JAR
-        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-
-
-        String line;
-
-        while ((line=reader.readLine())!=null) {
-            list.add(line);
-        }
-
-        in.close();
-        reader.close();
-
-
-        return list;
-
-
-    }
-
-
-
-
 
 }
