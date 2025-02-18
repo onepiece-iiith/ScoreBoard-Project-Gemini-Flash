@@ -2,6 +2,22 @@ package TableViewFiles;
 
 public class TableBowler {
 
+    private BowlerStats bowlerStats;
+
+    public TableBowler(BowlerStats bowlerStats) {
+        this.bowlerStats = bowlerStats;
+    }
+
+    public BowlerStats getBowlerStats() {
+        return bowlerStats;
+    }
+
+    public void setBowlerStats(BowlerStats bowlerStats) {
+        this.bowlerStats = bowlerStats;
+    }
+}
+
+class BowlerStats{
     private String bowlerName;
     private String bowlerOver;
     private String maidenOver;
@@ -11,7 +27,7 @@ public class TableBowler {
     private String noBall;
     private String economy;
 
-    public TableBowler(String bowlerName, String bowlerOver, String maidenOver, String runGiven, String wicketTaken, String wideBall, String noBall, String economy) {
+    public BowlerStats(String bowlerName, String bowlerOver, String maidenOver, String runGiven, String wicketTaken, String wideBall, String noBall, String economy) {
         this.bowlerName = bowlerName;
         this.bowlerOver = bowlerOver;
         this.maidenOver = maidenOver;
