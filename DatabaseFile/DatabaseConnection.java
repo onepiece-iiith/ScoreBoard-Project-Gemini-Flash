@@ -97,65 +97,23 @@ public class DatabaseConnection {
         return connectDB;
     }
 
-    public ObservableList<TableBatsman> getBatsmanData(String tableName) throws Exception{
-
+    public <T> ObservableList<T> getData(String tableName, Class<T> tableClass, String sql) throws Exception{
 
         Connection connect = getConnection();
-        ObservableList<TableBatsman> list = FXCollections.observableArrayList();
-
-        String sql = "SELECT * FROM " + tableName + ";";
+        ObservableList<T> list = FXCollections.observableArrayList();
 
         PreparedStatement statement = connect.prepareStatement(sql);
         ResultSet results = statement.executeQuery();
 
         while(results.next()){
 
-            String playerName = results.getString("batsman_name");
-            String outType = results.getString("out_type");
-            String run = results.getString("batsman_run");
-            String ballPlayed = results.getString("ball_played");
-            String four = results.getString("four_run");
-            String six = results.getString("six_run");
-            String strikeRate = results.getString("strike_rate");
-
-            TableBatsman batsman = new TableBatsman(playerName,outType,run,ballPlayed,four,six,strikeRate);
-
-            list.add(batsman);
-
+            T obj = tableClass.getConstructor(String[].class).newInstance(new String[]{});
+            // Assuming your TableBatsman and TableBowler classes have a constructor that takes a String[] and sets the values
+            list.add(obj);
         }
         return list;
 
     }
 
-    public ObservableList<TableBowler> getBowlerData(String tableName) throws Exception{
-
-
-        Connection connect = getConnection();
-        ObservableList<TableBowler> list = FXCollections.observableArrayList();
-
-        String sql = "select * from " + tableName + ";";
-
-        PreparedStatement statement = connect.prepareStatement(sql);
-        ResultSet results = statement.executeQuery();
-
-        while(results.next()){
-
-            String bowlerName = results.getString("bowler_name");
-            String bowlerOver = results.getString("bowler_over");
-            String maidenOver = results.getString("maiden_over");
-            String runGiven = results.getString("run_given");
-            String wicketTaken = results.getString("wicket_taken");
-            String wideBall = results.getString("wide_ball");
-            String noBall = results.getString("no_ball");
-            String economy = results.getString("economy");
-
-            TableBowler bowler = new TableBowler(bowlerName,bowlerOver,maidenOver,runGiven,wicketTaken,wideBall,noBall,economy);
-
-            list.add(bowler);
-
-        }
-        return list;
-
-    }
 
 }
